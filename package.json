@@ -1,6 +1,6 @@
 {
   "name": "waweb-phi",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "control whatsapp web with nodejs",
   "main": "./index.js",
   "scripts": {
@@ -8,9 +8,9 @@
     "start": "node bot.js"
   },
   "bugs": {
-    "url": "https://github.com/oqhadev/-phi/issues"
+    "url": "https://github.com/oqhadev/waweb-phi/issues"
   },
-  "homepage": "https://github.com/oqhadev/-phi#readme",
+  "homepage": "https://github.com/oqhadev/waweb-phi",
 
 
   "repository": {
