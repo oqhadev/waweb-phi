@@ -5,6 +5,9 @@ WAWEB-phi is library for controlling whatsapp web for nodejs,
 inspired from [whatsapp-web.js](https://github.com/pedroslopez/whatsapp-web.js) and WAPI.js
 
 
+What is the difference? This library uses wapi.js which contains features such as sending pictures, sending to numbers that are not in the contact list
+and many more
+
 ## Installation
 NPM
 ```bash
