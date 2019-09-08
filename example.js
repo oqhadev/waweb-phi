@@ -2,7 +2,7 @@
 
 
 
-const { Client } = require('./index')
+const Client = require('./index')
 
 const client = new Client({
     puppeteer: { headless: false },
