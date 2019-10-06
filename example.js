@@ -49,10 +49,10 @@ client.on('ready', () => {
 
         var today = new Date();
         var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-        client.sendMessageToID("6289506096398@c.us", `test ${time}`).then((r) => {
+        client.sendMessageToID("62895060963988888@c.us", `test ${time}`).then((r) => {
             console.log("sendMessageToID",r)
         })
-        client.sendMessage("62895060963988@c.us", `test ${time}`).then((r) => {
+        client.sendMessage("6289506096398@c.us", `test ${time}`).then((r) => {
             console.log("sendMessage",r)
         })
     }, 2000);
