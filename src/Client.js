@@ -136,11 +136,12 @@ class Client extends EventEmitter {
     async sendMessage(chatId, message, data) {
         try {
 
-            await this.pupPage.evaluate((chatId, message) => {
-                WAPI.sendMessage(chatId, message);
+            let status = await this.pupPage.evaluate((chatId, message) => {
+               return WAPI.sendMessage(chatId, message);
             }, chatId, message)
+            console.log('status',status)
             return {
-                status: true,
+                status: status,
                 data: data
             }
         } catch (error) {
@@ -156,11 +157,13 @@ class Client extends EventEmitter {
 
         try {
 
-            await this.pupPage.evaluate((chatId, message) => {
-                WAPI.sendMessageToID(chatId, message);
+            let status = await this.pupPage.evaluate((chatId, message) => {
+                return WAPI.sendMessageToID(chatId, message);
             }, chatId, message)
+
+
             return {
-                status: true,
+                status: status,
                 data: data
             }
         } catch (error) {
