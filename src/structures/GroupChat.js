@@ -19,7 +19,7 @@ class GroupChat extends Chat {
     get owner() {
         return this.groupMetadata.owner;
     }
-    
+
     /**
      * Gets the date at which the group was created
      */
@@ -89,7 +89,7 @@ class GroupChat extends Chat {
             return Store.Chat.get(chatId).setSubject(subject);
         }, this.id._serialized, subject);
 
-        if(res.status == 200) {
+        if (res.status == 200) {
             this.name = subject;
         }
     }
@@ -118,11 +118,11 @@ class GroupChat extends Chat {
 
         if (res.status == 200) {
             return res.code;
-        } 
+        }
 
         throw new Error('Not authorized')
     }
-    
+
     /**
      * Invalidates the current group invite code and generates a new one
      */

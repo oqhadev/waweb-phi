@@ -133,10 +133,44 @@ class Client extends EventEmitter {
      * @param {string} chatId
      * @param {string} message 
      */
-    async sendMessage(chatId, message) {
-        await this.pupPage.evaluate((chatId, message) => {
-            WAPI.sendMessage(chatId, message);
-        }, chatId, message)
+    async sendMessage(chatId, message, data) {
+        try {
+
+            await this.pupPage.evaluate((chatId, message) => {
+                WAPI.sendMessage(chatId, message);
+            }, chatId, message)
+            return {
+                status: true,
+                data: data
+            }
+        } catch (error) {
+            return {
+                status: false,
+                data: data
+            }
+
+        }
+    }
+
+    async sendMessageToID(chatId, message, data) {
+
+        try {
+
+            await this.pupPage.evaluate((chatId, message) => {
+                WAPI.sendMessageToID(chatId, message);
+            }, chatId, message)
+            return {
+                status: true,
+                data: data
+            }
+        } catch (error) {
+            return {
+                status: false,
+                data: data
+            }
+
+        }
+
     }
 
     /**
@@ -163,21 +197,7 @@ class Client extends EventEmitter {
         return ChatFactory.create(this, chat);
     }
 
-    async sendWapi() {
-        Date.prototype.addHours = function (h) {
-            this.setHours(this.getHours() + h);
-            return this;
-        }
 
-        let dateNow = new Date().addHours(7).toISOString().slice(0, 19).replace('T', ' ');
-        console.log("send wapi")
-        var chatId = "6283894938261@c.us"
-        var message = dateNow
-        await this.pupPage.evaluate((chatId, message) => {
-            WAPI.sendMessageToID(chatId, message);
-        }, chatId, message)
-
-    }
 
 }
 

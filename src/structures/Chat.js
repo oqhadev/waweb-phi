@@ -28,6 +28,9 @@ class Chat extends Base {
     sendMessage(message) {
         return this.client.sendMessage(this.id._serialized, message);
     }
+    sendMessageToID(message) {
+        return this.client.sendMessageToID(this.id._serialized, message);
+    }
 }
 
 module.exports = Chat;
