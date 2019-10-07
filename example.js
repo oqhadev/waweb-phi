@@ -49,17 +49,21 @@ client.on('ready', () => {
 
         var today = new Date();
         var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-        client.sendMessageToID("62895060963988888@c.us", `test ${time}`).then((r) => {
+        client.sendMessageToID("6289506096398@c.us", `test ${time}`).then((r) => {
             console.log("sendMessageToID",r)
         })
         client.sendMessage("6289506096398@c.us", `test ${time}`).then((r) => {
             console.log("sendMessage",r)
+        })
+        client.getBatteryLevel().then((r) => {
+            console.log("getBatteryLevel", r)
         })
     }, 2000);
 
 
 
 });
+
 
 client.on('message', async msg => {
     console.log('MESSAGE RECEIVED', msg);

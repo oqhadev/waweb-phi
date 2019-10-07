@@ -75,6 +75,7 @@ client.on('ready', () => {
         var today = new Date();
         var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
         client.sendMessage("62895xxxxxxxx@c.us", `test ${time}`)
+        client.sendMessageToID("62895xxxxxxxx@c.us", `test ${time}`) //send to people who not already in chat or not listed on your contact
     }, 2000);
 
 
@@ -96,8 +97,9 @@ client.on('disconnected', () => {
 
 ## Todo
 - [x] SendMessageToID (send message to who not in contact list)
+- [x] sendMessage and sendMessageToID Return Promise (Succes or not)
+- [x] event on getBroadcast (this things is already embeded on event `On Message`")
 - [ ] Implement all WAPI.js Function
-- [ ] event on getBroadcast
 - [ ] and more
 
 

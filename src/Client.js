@@ -139,7 +139,6 @@ class Client extends EventEmitter {
             let status = await this.pupPage.evaluate((chatId, message) => {
                return WAPI.sendMessage(chatId, message);
             }, chatId, message)
-            console.log('status',status)
             return {
                 status: status,
                 data: data
@@ -149,10 +148,16 @@ class Client extends EventEmitter {
                 status: false,
                 data: data
             }
-
+            
         }
     }
-
+    async getBatteryLevel(){
+        
+        let batLevel = await this.pupPage.evaluate(() => {
+            return WAPI.getBatteryLevel();
+        })
+        return batLevel
+    }
     async sendMessageToID(chatId, message, data) {
 
         try {
