@@ -74,8 +74,15 @@ client.on('ready', () => {
 
         var today = new Date();
         var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-        client.sendMessage("62895xxxxxxxx@c.us", `test ${time}`)
-        client.sendMessageToID("62895xxxxxxxx@c.us", `test ${time}`) //send to people who not already in chat or not listed on your contact
+        client.sendMessageToID("6289506096398@c.us", `test ${time}`).then((r) => { //send to people who not already in chat or not listed on your contact
+            console.log("sendMessageToID",r)
+        })
+        client.sendMessage("6289506096398@c.us", `test ${time}`).then((r) => {  
+            console.log("sendMessage",r)
+        })
+        client.getBatteryLevel().then((r) => {
+            console.log("getBatteryLevel", r)
+        }) 
     }, 2000);
 
 
@@ -99,6 +106,7 @@ client.on('disconnected', () => {
 - [x] SendMessageToID (send message to who not in contact list)
 - [x] sendMessage and sendMessageToID Return Promise (Succes or not)
 - [x] event on getBroadcast (this things is already embeded on event `On Message`")
+- [x] getBatteryLevel (this things is already embeded on event `On Message`")
 - [ ] Implement all WAPI.js Function
 - [ ] and more
 
