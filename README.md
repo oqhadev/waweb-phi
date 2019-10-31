@@ -103,6 +103,7 @@ client.on('disconnected', () => {
 ```
 
 ## Todo
+- [x] add checkNumberStatus
 - [x] SendMessageToID (send message to who not in contact list)
 - [x] sendMessage and sendMessageToID Return Promise (Succes or not)
 - [x] event on getBroadcast (this things is already embeded on event `On Message`")

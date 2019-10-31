@@ -180,6 +180,27 @@ class Client extends EventEmitter {
         }
 
     }
+    async checkNumberStatus(id, data) {
+
+        try {
+            let status = await this.pupPage.evaluate((id) => {
+                return WAPI.checkNumberStatus(id,function(a){
+                    return a;
+                });
+            }, id)
+
+
+            return {
+                status: status,
+            }
+        } catch (error) {
+            return {
+                status: false,
+            }
+
+        }
+
+    }
 
     /**
      * Get all current chat instances

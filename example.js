@@ -7,12 +7,12 @@ const Client = require('./index')
 const client = new Client({
     puppeteer: { headless: false },
     session: {
-        WABrowserId: '"4Lqks4vMVfP7BQ9Ryzkk5g=="',
+        WABrowserId: '"qU5V5x/V2iTdfH5QdHc7yg=="',
         WASecretBundle:
-            '{"key":"SW1da4Zmd3ibX6+w6mOpvYDyElKDtCoeP11oy8i6rQg=","encKey":"UBg1axWojLiY/fE+fGpeLnNp1Q0gZx4ajMmSAGwLWVo=","macKey":"SW1da4Zmd3ibX6+w6mOpvYDyElKDtCoeP11oy8i6rQg="}',
-        WAToken1: '"Y0DzO730Cq5/nVNtNPTC4Np9/Vha+QDU0VNNUV+UIUM="',
+            '{"key":"TVCj4p60J9nklQDp+hSmK+nvCVMHK2fwID9tpShGQVo=","encKey":"do3JhuI3JvkTAuTs4UNUbZHuHGjXA+UOopphm5un2b8=","macKey":"TVCj4p60J9nklQDp+hSmK+nvCVMHK2fwID9tpShGQVo="}',
+        WAToken1: '"F+hVGpk5GwmSNh1bQYlPaffAL//Oc00Oj9C9VZqWlBQ="',
         WAToken2:
-            '"1@QX5gj+ucOgU4RO/MrRa7JCPArc2DPRJo0GOkPw4g5L/FmePukYKee9lEePG11u2AJm1y4gdDHxCzDA=="'
+            '"1@RDZOZEmI8Yxi8m8qw3spzoNK/YqfI8JGLxzWSJ5jeVJVp8faNGDB6LXSuxiA1gvyFeSapmChrc6JfA=="'
     }
 
 
@@ -45,8 +45,9 @@ client.on('ready', () => {
 
 
     setTimeout(() => {
+    
         console.log("Send Message");
-
+        
         var today = new Date();
         var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
         client.sendMessageToID("6289506096398@c.us", `test ${time}`).then((r) => {
@@ -58,7 +59,18 @@ client.on('ready', () => {
         client.getBatteryLevel().then((r) => {
             console.log("getBatteryLevel", r)
         })
+        
+        console.log("checkNumberStatus");
+        let number = "6289506096398@c.us"
+        client.checkNumberStatus(number).then((r) => {
+            console.log("NumberStatus", r)
+        })
+
     }, 2000);
+
+
+
+    
 
 
 

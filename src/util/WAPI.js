@@ -1068,22 +1068,12 @@ window.WAPI.deleteMessage = function (chatId, messageArray, revoke=false, done) 
     return true;
 };
 
-window.WAPI.checkNumberStatus = function (id, done) {
-    window.Store.WapQuery.queryExist(id).then((result) => {
-        if( done !== undefined) {
-            if (result.jid === undefined) throw 404;
-            done(window.WAPI._serializeNumberStatusObj(result));
-        }
-    }).catch((e) => {
-        if (done !== undefined) {
-            done(window.WAPI._serializeNumberStatusObj({
-                status: e,
-                jid   : id
-            }));
-        }
+window.WAPI.checkNumberStatus = function (id) {
+   return window.Store.WapQuery.queryExist(id).then((result) => {
+       return window.WAPI._serializeNumberStatusObj(result);
+        
     });
 
-    return true;
 };
 
 /**
