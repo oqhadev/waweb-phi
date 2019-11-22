@@ -1,6 +1,6 @@
 {
   "name": "waweb-phi",
-  "version": "0.1.7",
+  "version": "0.1.10",
   "description": "control whatsapp web with nodejs",
   "main": "./index.js",
   "scripts": {
