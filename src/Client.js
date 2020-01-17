@@ -43,7 +43,7 @@ class Client extends EventEmitter {
         }
         await page.goto(WhatsWebURL, { waitUntil: 'networkidle0' });
 
-        const KEEP_PHONE_CONNECTED_IMG_SELECTOR = '._1wSzK';
+        const KEEP_PHONE_CONNECTED_IMG_SELECTOR = '._1Jzz1';
 
         if (this.options.session) {
             // Check if session restore was successfull 
@@ -63,14 +63,14 @@ class Client extends EventEmitter {
         } else {
             // Wait for QR Code
 
-            const QR_CONTAINER_SELECTOR = '._2d3Jz';
-            const QR_VALUE_SELECTOR = '._1pw2F';
+            const QR_CONTAINER_SELECTOR = '._3YhvY';
+            const QR_VALUE_SELECTOR = '._2RT36';
 
             await page.waitForSelector(QR_CONTAINER_SELECTOR);
 
             const qr = await page.$eval(QR_VALUE_SELECTOR, node => node.getAttribute('data-ref'));
             this.emit(Events.QR_RECEIVED, qr);
-
+            
             // Wait for code scan
             await page.waitForSelector(KEEP_PHONE_CONNECTED_IMG_SELECTOR, { timeout: 0 });
         }
@@ -97,7 +97,6 @@ class Client extends EventEmitter {
             WAToken1: localStorage.WAToken1,
             WAToken2: localStorage.WAToken2
         }
-
         this.emit(Events.AUTHENTICATED, session);
 
 
