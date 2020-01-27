@@ -103,7 +103,7 @@ client.on('disconnected', () => {
 ```
 
 ## Update
-- 27/01/2020 (v0.1.12) add authTimeout option + change default authTimeout value from 5000ms to 10000ms , for detail check example.js
+- 27/01/2020 (v0.1.12 > v0.1.13) add authTimeout option + change default authTimeout value from 5000ms to 10000ms , for detail check example.js
 - 17/01/2020 (v0.1.11) fix selector qr/qrvalue/keep phoneimage update 
 
 ## Todo

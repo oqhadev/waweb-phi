@@ -43,7 +43,6 @@ class Client extends EventEmitter {
         await page.goto(WhatsWebURL, { waitUntil: 'networkidle0' });
 
         const KEEP_PHONE_CONNECTED_IMG_SELECTOR = Selectors.KEEP_PHONE_CONNECTED_IMG_SELECTOR;
-        console.log("timeout",this.options.authTimeout);
         if (this.options.session) {
             // Check if session restore was successfull 
             try {
