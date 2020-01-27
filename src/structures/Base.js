@@ -18,21 +18,6 @@ class Base {
     
     _patch(data) { return data; }
 
-    /**
-     * Name that represents this model in the WhatsApp Web Store
-     * @readonly
-     */
-    static get WAppModel() {
-        return this.name;
-    }
-
-    /**
-     * Extra fields to add to model serialization 
-     * @readonly
-     */
-    static get extraFields() {
-        return [];
-    }
 
 }
 

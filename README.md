@@ -103,7 +103,8 @@ client.on('disconnected', () => {
 ```
 
 ## Update
-- 17/01/2020 fix selector qr/qrvalue/keep phoneimage update 
+- 27/01/2020 (v0.1.12) add authTimeout option + change default authTimeout value from 5000ms to 10000ms , for detail check example.js
+- 17/01/2020 (v0.1.11) fix selector qr/qrvalue/keep phoneimage update 
 
 ## Todo
 - [x] add checkNumberStatus
@@ -111,7 +112,7 @@ client.on('disconnected', () => {
 - [x] sendMessage and sendMessageToID Return Promise (Succes or not)
 - [x] event on getBroadcast (this things is already embeded on event `On Message`")
 - [x] getBatteryLevel (this things is already embeded on event `On Message`")
-- [ ] Implement all WAPI.js Function : Discontinue, just using client instance
+- [x] Implement all WAPI.js Function : Discontinue, just using client instance
 
 
 

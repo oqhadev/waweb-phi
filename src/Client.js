@@ -4,8 +4,7 @@
 const EventEmitter = require('events');
 const puppeteer = require('puppeteer');
 const Util = require('./util/Util');
-const { WhatsWebURL, UserAgent, DefaultOptions, Events } = require('./util/Constants');
-const ChatFactory = require('./factories/ChatFactory');
+const { WhatsWebURL, UserAgent, DefaultOptions, Events, Selectors } = require('./util/Constants');
 const Message = require('./structures/Message')
 const path = require("path");
 
@@ -43,12 +42,12 @@ class Client extends EventEmitter {
         }
         await page.goto(WhatsWebURL, { waitUntil: 'networkidle0' });
 
-        const KEEP_PHONE_CONNECTED_IMG_SELECTOR = '._1Jzz1';
-
+        const KEEP_PHONE_CONNECTED_IMG_SELECTOR = Selectors.KEEP_PHONE_CONNECTED_IMG_SELECTOR;
+        console.log("timeout",this.options.authTimeout);
         if (this.options.session) {
             // Check if session restore was successfull 
             try {
-                await page.waitForSelector(KEEP_PHONE_CONNECTED_IMG_SELECTOR, { timeout: 5000 });
+                await page.waitForSelector(KEEP_PHONE_CONNECTED_IMG_SELECTOR, { timeout: this.options.authTimeout });
             } catch (err) {
                 if (err.name === 'TimeoutError') {
                     this.emit(Events.AUTHENTICATION_FAILURE, 'Unable to log in. Are the session details valid?');
@@ -63,14 +62,14 @@ class Client extends EventEmitter {
         } else {
             // Wait for QR Code
 
-            const QR_CONTAINER_SELECTOR = '._3YhvY';
-            const QR_VALUE_SELECTOR = '._2RT36';
+            const QR_CONTAINER_SELECTOR = Selectors.QR_CONTAINER_SELECTOR;
+            const QR_VALUE_SELECTOR = Selectors.QR_VALUE_SELECTOR;
 
             await page.waitForSelector(QR_CONTAINER_SELECTOR);
 
             const qr = await page.$eval(QR_VALUE_SELECTOR, node => node.getAttribute('data-ref'));
             this.emit(Events.QR_RECEIVED, qr);
-            
+
             // Wait for code scan
             await page.waitForSelector(KEEP_PHONE_CONNECTED_IMG_SELECTOR, { timeout: 0 });
         }
@@ -81,7 +80,6 @@ class Client extends EventEmitter {
 
 
 
-        // await page.evaluate(ExposeStore);
 
 
 
@@ -136,7 +134,7 @@ class Client extends EventEmitter {
         try {
 
             let status = await this.pupPage.evaluate((chatId, message) => {
-               return WAPI.sendMessage(chatId, message);
+                return WAPI.sendMessage(chatId, message);
             }, chatId, message)
             return {
                 status: status,
@@ -147,11 +145,11 @@ class Client extends EventEmitter {
                 status: false,
                 data: data
             }
-            
+
         }
     }
-    async getBatteryLevel(){
-        
+    async getBatteryLevel() {
+
         let batLevel = await this.pupPage.evaluate(() => {
             return WAPI.getBatteryLevel();
         })
@@ -183,7 +181,7 @@ class Client extends EventEmitter {
 
         try {
             let status = await this.pupPage.evaluate((id) => {
-                return WAPI.checkNumberStatus(id,function(a){
+                return WAPI.checkNumberStatus(id, function (a) {
                     return a;
                 });
             }, id)
@@ -200,32 +198,6 @@ class Client extends EventEmitter {
         }
 
     }
-
-    /**
-     * Get all current chat instances
-     */
-    async getChats() {
-        // let chats = await this.pupPage.evaluate(() => {
-        //     return Store.Chat.serialize()
-        // });
-
-        // return chats.map(chatData => ChatFactory.create(this, chatData));
-        throw new Error('NOT IMPLEMENTED')
-    }
-
-    /**
-     * Get chat instance by ID
-     * @param {string} chatId 
-     */
-    async getChatById(chatId) {
-        let chat = await this.pupPage.evaluate(chatId => {
-            return WWebJS.getChat(chatId);
-        }, chatId);
-
-        return ChatFactory.create(this, chat);
-    }
-
-
 
 }
 

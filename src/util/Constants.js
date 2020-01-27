@@ -8,14 +8,15 @@ exports.DefaultOptions = {
     puppeteer: {
         headless: true
     },
-    session: false
+    session: false,
+    authTimeout: 10000,
+}
+exports.Selectors = {
+    KEEP_PHONE_CONNECTED_IMG_SELECTOR :  '._1Jzz1',
+    QR_CONTAINER_SELECTOR :  '._3YhvY',
+    QR_VALUE_SELECTOR :  '._2RT36',
 }
 
-exports.Status = {
-    INITIALIZING: 0,
-    AUTHENTICATING: 1,
-    READY: 3
-}
 
 exports.Events = {
     AUTHENTICATED: 'authenticated',
@@ -26,18 +27,3 @@ exports.Events = {
     DISCONNECTED: 'disconnected'
 }
 
-exports.MessageTypes = {
-    TEXT: 'chat',
-    AUDIO: 'audio',
-    VOICE: 'ptt',
-    IMAGE: 'image',
-    VIDEO: 'video',
-    DOCUMENT: 'document',
-    STICKER: 'sticker'
-}
-
-exports.ChatTypes = {
-    SOLO: 'solo',
-    GROUP: 'group',
-    UNKNOWN: 'unknown'
-}

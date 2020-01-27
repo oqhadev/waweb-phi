@@ -6,6 +6,8 @@ const Client = require('./index')
 
 const client = new Client({
     puppeteer: { headless: false },
+    authTimeout: 30000,
+    //remove session if u want to get qr
     session: {
         WABrowserId: '"qU5V5x/V2iTdfH5QdHc7yg=="',
         WASecretBundle:
@@ -14,6 +16,7 @@ const client = new Client({
         WAToken2:
             '"1@RDZOZEmI8Yxi8m8qw3spzoNK/YqfI8JGLxzWSJ5jeVJVp8faNGDB6LXSuxiA1gvyFeSapmChrc6JfA=="'
     }
+
 
 
 });
