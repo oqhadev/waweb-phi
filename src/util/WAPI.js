@@ -12,7 +12,8 @@ if (!window.Store) {
             let foundCount = 0;
             let neededObjects = [
                 { id: "Store", conditions: (module) => (module.Chat && module.Msg) ? module : null },
-                { id: "MediaCollection", conditions: (module) => (module.default && module.default.prototype && module.default.prototype.processFiles !== undefined) ? module.default : null },
+                // { id: "MediaCollection", conditions: (module) => (module.default && module.default.prototype && module.default.prototype.processFiles !== undefined) ? module.default : null },
+                { id: "MediaCollection", conditions: (module) => (module.default && module.default.prototype && module.default.prototype.processAttachments) ? module.default : null },
                 { id: "ChatClass", conditions: (module) => (module.default && module.default.prototype && module.default.prototype.Collection !== undefined && module.default.prototype.Collection === "Chat") ? module : null },
                 { id: "MediaProcess", conditions: (module) => (module.BLOB) ? module : null },
                 { id: "Wap", conditions: (module) => (module.createGroup) ? module : null },
@@ -1181,14 +1182,60 @@ window.WAPI.sendImage = function (imgBase64, chatid, filename, caption, done) {
     // create new chat
     return Store.Chat.find(idUser).then((chat) => {
         var mediaBlob = window.WAPI.base64ImageToFile(imgBase64, filename);
-        var mc = new Store.MediaCollection();
-        mc.processFiles([mediaBlob], chat, 1).then(() => {
+        var mc = new Store.MediaCollection(chat);
+        // mc.processFiles([mediaBlob], chat, 1).then(() => {
+        //     var media = mc.models[0];
+        //     media.sendToChat(chat, { caption: caption });
+        //     if (done !== undefined) done(true);
+        // });
+        mc.processAttachments([{file: mediaBlob}, 1], chat, 1).then(() => {
             var media = mc.models[0];
             media.sendToChat(chat, { caption: caption });
             if (done !== undefined) done(true);
-        });
+        })
     });
+
+
+
+
+    
 }
+
+
+
+window.WAPI.sendImageToID = function (imgBase64, chatid, filename, caption, done) {
+    //var idUser = new window.Store.UserConstructor(chatid);
+    try {
+        
+    var id = chatid
+    if (window.Store.Chat.length == 0)
+        return false;
+
+    firstChat = Store.Chat.models[0];
+    var originalID = firstChat.id;
+    firstChat.id = typeof originalID == "string" ? id : new window.Store.UserConstructor(id, { intentionallyUsePrivateConstructor: true });
+
+
+        chat = firstChat
+        var mediaBlob = window.WAPI.base64ImageToFile(imgBase64, filename);
+        var mc = new Store.MediaCollection(chat);
+        
+         mc.processAttachments([{file: mediaBlob}, 1], chat, 1).then(() => {
+            var media = mc.models[0];
+            media.sendToChat(chat, { caption: caption });
+            if (done !== undefined) done(true);
+        })
+        return true;
+
+    } catch (error) {
+        console.log('sendImageToID',error)
+        
+    }
+
+
+  
+}
+
 
 window.WAPI.base64ImageToFile = function (b64Data, filename) {
     var arr = b64Data.split(',');
