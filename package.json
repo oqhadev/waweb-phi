@@ -5,7 +5,7 @@
   "main": "./index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node bot.js"
+    "example": "node example.js"
   },
   "bugs": {
     "url": "https://github.com/oqhadev/waweb-phi/issues"
@@ -21,6 +21,9 @@
   "keywords": [
     "whatsapp",
     "whatsapp-web",
+    "wbot",
+    "bot",
+    "waweb",
     "whatsapp-phi",
     "waweb-phi",
     "phi",

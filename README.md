@@ -160,7 +160,6 @@ client.on('disconnected', () => {
 
 
 
-## Note
 
 ## Update
 - 19/02/2020 (v0.1.14) Add SendImageToID + fix SendImage + add sendSeen + add deviceInfo 
