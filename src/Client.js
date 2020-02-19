@@ -130,22 +130,7 @@ class Client extends EventEmitter {
      * @param {string} message 
      */
     async sendMessage(chatId, message, data) {
-        try {
-
-            let status = await this.pupPage.evaluate((chatId, message) => {
-                return WAPI.sendMessage(chatId, message);
-            }, chatId, message)
-            return {
-                status: status,
-                data: data
-            }
-        } catch (error) {
-            return {
-                status: false,
-                data: data
-            }
-
-        }
+        return this.sendMessageToID(chatId, message, data)
     }
     async getBatteryLevel() {
 
@@ -175,6 +160,46 @@ class Client extends EventEmitter {
 
         }
 
+    }
+    async sendAttachToID(base64file,caption,filename,chatId, data) {
+
+        try {
+
+            let status = await this.pupPage.evaluate((base64file,caption,filename,chatId) => {
+                return WAPI.sendImageToID(base64file,chatId,filename,caption);
+            }, base64file,caption,filename,chatId)
+
+
+            return {
+                status: status,
+                data: data
+            }
+        } catch (error) {
+            return {
+                status: false,
+                data: data
+            }
+
+        }
+
+    }
+    
+    async sendAttach(base64file,caption,filename,chatId, data) {
+        return this.sendAttachToID(base64file,caption,filename,chatId, data);
+        
+    }
+
+    async deviceInfo(){
+        return  await this.pupPage.evaluate(() => {
+            return Store.Conn.phone;
+    
+        })
+    }
+    async sendSeen(chatId){
+         await this.pupPage.evaluate((chatId) => {
+            return WAPI.sendSeen(chatId);
+        }, chatId)
+        return true;
     }
     async checkNumberStatus(id, data) {
 
