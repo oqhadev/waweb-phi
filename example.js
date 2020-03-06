@@ -8,14 +8,11 @@ const client = new wa({
     // u can passing wa session here, and example, just uncoment and change to ur session
     // u can see ur session when u get AUTHENTICATED
     // 
-    // session: {
-    //     WABrowserId: '"qU5V5x/V2iTdfH5QdHc7yg=="',
-    //     WASecretBundle:
-    //         '{"key":"TVCj4p60J9nklQDp+hSmK+nvCVMHK2fwID9tpShGQVo=","encKey":"do3JhuI3JvkTAuTs4UNUbZHuHGjXA+UOopphm5un2b8=","macKey":"TVCj4p60J9nklQDp+hSmK+nvCVMHK2fwID9tpShGQVo="}',
-    //     WAToken1: '"F+hVGpk5GwmSNh1bQYlPaffAL//Oc00Oj9C9VZqWlBQ="',
-    //     WAToken2:
-    //         '"1@RDZOZEmI8Yxi8m8qw3spzoNK/YqfI8JGLxzWSJ5jeVJVp8faNGDB6LXSuxiA1gvyFeSapmChrc6JfA=="'
-    // }
+//     session:{ WABrowserId: '"WCHSqNpc1nEPbVwcBP9cCA=="',
+//   WASecretBundle:
+//   '{"key":"fJ8ZO/gC1fwKXBr4rq51XE714ZZ6x/nn9QbfEKplcN4=","encKey":"pmu5SZLDxI/alQkR7TnyVolDF3aC6KBhJeMZbmglX9I=","macKey":"fJ8ZO/gC1fwKXBr4rq51XE714ZZ6x/nn9QbfEKplcN4="}',  WAToken1: '"p9e7+FADmpH6VFXq4Kt7N0b+c4tO8JTaMrZtJ2n2/bE="',
+//  WAToken2:
+//   '"1@oV7XytZvsnufZlQT6wrH2SG1ygONSw6GTKOmty3kALI022iud0ESuGUTOgC8AS73bFl+PuEmgzrw+g=="' }
 
 
 
@@ -24,6 +21,11 @@ const client = new wa({
 
 client.initialize();
 
+
+client.on('ack', (data) => {
+    console.log('ACK', data);
+
+});
 
 client.on('qr', (qr) => {
     console.log('QR RECEIVED', qr);

@@ -24,6 +24,7 @@ exports.Events = {
     READY: 'ready',
     MESSAGE_CREATE: 'message',
     QR_RECEIVED: 'qr',
+    ACK: 'ack',
     DISCONNECTED: 'disconnected'
 }
 

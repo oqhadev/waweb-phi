@@ -6,6 +6,7 @@ const puppeteer = require('puppeteer');
 const Util = require('./util/Util');
 const { WhatsWebURL, UserAgent, DefaultOptions, Events, Selectors } = require('./util/Constants');
 const Message = require('./structures/Message')
+const Ack = require('./structures/Ack')
 const path = require("path");
 
 /**
@@ -97,6 +98,11 @@ class Client extends EventEmitter {
         this.emit(Events.AUTHENTICATED, session);
 
 
+        await page.exposeFunction('onAck', data => {
+            if (!data.id.fromMe && data.isNewMsg) return;
+           
+            this.emit(Events.ACK, new Ack(this, data));
+        });
         await page.exposeFunction('onAddMessageEvent', msg => {
             if (msg.id.fromMe || !msg.isNewMsg) return;
             this.emit(Events.MESSAGE_CREATE, new Message(this, msg));
@@ -111,6 +117,7 @@ class Client extends EventEmitter {
 
         await page.evaluate(() => {
             Store.Msg.on('add', onAddMessageEvent);
+            Store.Msg.on("change:ack", onAck);
             Store.Conn.on('change:connected', onConnectionChangedEvent);
         })
 
