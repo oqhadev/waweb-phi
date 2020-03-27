@@ -165,6 +165,7 @@ client.on('disconnected', () => {
 
 
 ## Update
+- 27/03/2020 (v0.1.16) Update 
 - 06/03/2020 (v0.1.15) add ack status (send,received,read) 
 - 19/02/2020 (v0.1.14) Add SendImageToID + fix SendImage + add sendSeen + add deviceInfo 
 - 27/01/2020 (v0.1.12 > v0.1.13) add authTimeout option + change default authTimeout value from 5000ms to 10000ms , for detail check example.js

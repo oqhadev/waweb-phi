@@ -69,7 +69,10 @@ if (!window.Store) {
             }
         }
 
-        webpackJsonp([], { 'parasite': (x, y, z) => getStore(z) }, ['parasite']);
+        const parasite = `parasite${Date.now()}`
+        // webpackJsonp([], { [parasite]: (x, y, z) => getStore(z) }, [parasite]);
+        if (typeof webpackJsonp === 'function') webpackJsonp([], { [parasite]: (x, y, z) => getStore(z) }, [parasite]);
+        else webpackJsonp.push([[parasite], { [parasite]: (x, y, z) => getStore(z) }, [[parasite]]]);
     })();
 }
 
@@ -1188,7 +1191,7 @@ window.WAPI.sendImage = function (imgBase64, chatid, filename, caption, done) {
         //     media.sendToChat(chat, { caption: caption });
         //     if (done !== undefined) done(true);
         // });
-        mc.processAttachments([{file: mediaBlob}, 1], chat, 1).then(() => {
+        mc.processAttachments([{ file: mediaBlob }, 1], chat, 1).then(() => {
             var media = mc.models[0];
             media.sendToChat(chat, { caption: caption });
             if (done !== undefined) done(true);
@@ -1198,7 +1201,7 @@ window.WAPI.sendImage = function (imgBase64, chatid, filename, caption, done) {
 
 
 
-    
+
 }
 
 
@@ -1206,21 +1209,21 @@ window.WAPI.sendImage = function (imgBase64, chatid, filename, caption, done) {
 window.WAPI.sendImageToID = function (imgBase64, chatid, filename, caption, done) {
     //var idUser = new window.Store.UserConstructor(chatid);
     try {
-        
-    var id = chatid
-    if (window.Store.Chat.length == 0)
-        return false;
 
-    firstChat = Store.Chat.models[0];
-    var originalID = firstChat.id;
-    firstChat.id = typeof originalID == "string" ? id : new window.Store.UserConstructor(id, { intentionallyUsePrivateConstructor: true });
+        var id = chatid
+        if (window.Store.Chat.length == 0)
+            return false;
+
+        firstChat = Store.Chat.models[0];
+        var originalID = firstChat.id;
+        firstChat.id = typeof originalID == "string" ? id : new window.Store.UserConstructor(id, { intentionallyUsePrivateConstructor: true });
 
 
         chat = firstChat
         var mediaBlob = window.WAPI.base64ImageToFile(imgBase64, filename);
         var mc = new Store.MediaCollection(chat);
-        
-         mc.processAttachments([{file: mediaBlob}, 1], chat, 1).then(() => {
+
+        mc.processAttachments([{ file: mediaBlob }, 1], chat, 1).then(() => {
             var media = mc.models[0];
             media.sendToChat(chat, { caption: caption });
             if (done !== undefined) done(true);
@@ -1228,12 +1231,12 @@ window.WAPI.sendImageToID = function (imgBase64, chatid, filename, caption, done
         return true;
 
     } catch (error) {
-        console.log('sendImageToID',error)
-        
+        console.log('sendImageToID', error)
+
     }
 
 
-  
+
 }
 
 

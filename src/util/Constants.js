@@ -12,9 +12,9 @@ exports.DefaultOptions = {
     authTimeout: 10000,
 }
 exports.Selectors = {
-    KEEP_PHONE_CONNECTED_IMG_SELECTOR :  '._1Jzz1',
-    QR_CONTAINER_SELECTOR :  '._3YhvY',
-    QR_VALUE_SELECTOR :  '._2RT36',
+    KEEP_PHONE_CONNECTED_IMG_SELECTOR: '._1pn8B',
+    QR_CONTAINER_SELECTOR: '._11ozL',
+    QR_VALUE_SELECTOR: '._11ozL',
 }
 
 
