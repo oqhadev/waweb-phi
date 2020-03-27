@@ -13,7 +13,7 @@ exports.DefaultOptions = {
 }
 exports.Selectors = {
     KEEP_PHONE_CONNECTED_IMG_SELECTOR: '._1pn8B',
-    QR_CONTAINER_SELECTOR: '._11ozL',
+    QR_CONTAINER_SELECTOR: '.zCzor',
     QR_VALUE_SELECTOR: '._11ozL',
 }
 
