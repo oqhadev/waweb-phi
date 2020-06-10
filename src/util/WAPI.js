@@ -11,7 +11,7 @@ if (!window.Store) {
         function getStore(modules) {
             let foundCount = 0;
             let neededObjects = [
-                { id: "Store", conditions: (module) => (module.Chat && module.Msg) ? module : null },
+                { id: "Store", conditions: (module) => (module.default && module.default.Chat && module.default.Msg) ? module.default : null},
                 // { id: "MediaCollection", conditions: (module) => (module.default && module.default.prototype && module.default.prototype.processFiles !== undefined) ? module.default : null },
                 { id: "MediaCollection", conditions: (module) => (module.default && module.default.prototype && module.default.prototype.processAttachments) ? module.default : null },
                 { id: "ChatClass", conditions: (module) => (module.default && module.default.prototype && module.default.prototype.Collection !== undefined && module.default.prototype.Collection === "Chat") ? module : null },
@@ -60,9 +60,11 @@ if (!window.Store) {
                                 window.Store[needObj.id] = needObj.foundedModule;
                             }
                         });
-                        // window.Store.ChatClass.default.prototype.sendMessage = function (e) {
-                        //     return window.Store.SendTextMsgToChat(this, ...arguments);
-                        // }
+
+                        window.Store.sendMessage = function (e) {
+                            return window.Store.SendTextMsgToChat(this, ...arguments);
+                        }
+                        if(window.Store.MediaCollection) window.Store.MediaCollection.prototype.processFiles = window.Store.MediaCollection.prototype.processFiles || window.Store.MediaCollection.prototype.processAttachments;
                         return window.Store;
                     }
                 }
