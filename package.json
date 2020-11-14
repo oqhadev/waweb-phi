@@ -1,6 +1,6 @@
 {
   "name": "waweb-phi",
-  "version": "0.1.18",
+  "version": "0.1.19",
   "description": "control whatsapp web with nodejs",
   "main": "./index.js",
   "scripts": {
@@ -11,13 +11,10 @@
     "url": "https://github.com/oqhadev/waweb-phi/issues"
   },
   "homepage": "https://github.com/oqhadev/waweb-phi",
-
-
   "repository": {
     "type": "git",
     "url": "git+https://github.com/oqhadev/waweb-phi.git"
   },
-
   "keywords": [
     "whatsapp",
     "whatsapp-web",
@@ -35,8 +32,6 @@
   "author": "OqhaDev",
   "license": "Apache-2.0",
   "dependencies": {
-    "global": "^4.4.0",
     "puppeteer": "^1.12.2"
   }
-
 }

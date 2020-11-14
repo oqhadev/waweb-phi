@@ -139,6 +139,7 @@ class Client extends EventEmitter {
     async sendMessage(chatId, message, data) {
         return this.sendMessageToID(chatId, message, data)
     }
+  
     async getBatteryLevel() {
 
         let batLevel = await this.pupPage.evaluate(() => {
@@ -199,6 +200,12 @@ class Client extends EventEmitter {
     async deviceInfo(){
         return  await this.pupPage.evaluate(() => {
             return Store.Conn.phone;
+    
+        })
+    }
+    async myNumber(){
+        return  await this.pupPage.evaluate(() => {
+            return Store.Conn.wid.user;
     
         })
     }

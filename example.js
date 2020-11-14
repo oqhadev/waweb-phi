@@ -1,4 +1,4 @@
-const wa = require('waweb-phi')
+const wa = require('./index.js')
 
 
 const client = new wa({
@@ -6,11 +6,13 @@ const client = new wa({
     authTimeout: 30000,
     // // u can passing wa session here, and example, just uncoment and change to ur session
     // // u can see ur session when u get AUTHENTICATED
-    //     session:{ WABrowserId: '"WCHSqNpc1nEPbVwcBP9cCA=="',
-    //   WASecretBundle:
-    //   '{"key":"fJ8ZO/gC1fwKXBr4rq51XE714ZZ6x/nn9QbfEKplcN4=","encKey":"pmu5SZLDxI/alQkR7TnyVolDF3aC6KBhJeMZbmglX9I=","macKey":"fJ8ZO/gC1fwKXBr4rq51XE714ZZ6x/nn9QbfEKplcN4="}',  WAToken1: '"p9e7+FADmpH6VFXq4Kt7N0b+c4tO8JTaMrZtJ2n2/bE="',
-    //  WAToken2:
-    //   '"1@oV7XytZvsnufZlQT6wrH2SG1ygONSw6GTKOmty3kALI022iud0ESuGUTOgC8AS73bFl+PuEmgzrw+g=="' }
+        session:{  
+            WABrowserId: '"Y3zE8EQhWIWHT+ItCY9kCA=="',
+            WASecretBundle: '{"key":"C50aTAWlJ1rByUgfha0gg5hvANEytO05k5nSKo9Va9o=","encKey":"jXVd98Nw3BCyaveQ8d9CQ8jRJpBEXmWsjKcAxXsG0Z4=","macKey":"C50aTAWlJ1rByUgfha0gg5hvANEytO05k5nSKo9Va9o="}',
+            WAToken1: '"0miqfxF/fHw58Saz+Evro7NcbeTiOKqXwrWr7Uvn3AE="',
+            WAToken2: '"1@XddTicTfMprcuzUPL9HA2pEZLkUytDAdj/BQ79wA/U27GyHMRk8YuIoGYaxLJ2TY69bFTqcEyHIXQg=="'
+        } 
+         
 
 
 
@@ -70,14 +72,14 @@ client.on('ready', () => {
         client.deviceInfo().then((r) => {
             console.log("deviceInfo", r)
         })
-        // return
-        // { wa_version: '2.20.28',
-        // mcc: '510',
-        // mnc: '010',
-        // os_version: '9',
-        // device_manufacturer: 'OPPO',
-        // device_model: 'RMX1801',
-        // os_build_number: 'RMX1801EX_11_C.26' }
+        // // return
+        // // { wa_version: '2.20.28',
+        // // mcc: '510',
+        // // mnc: '010',
+        // // os_version: '9',
+        // // device_manufacturer: 'OPPO',
+        // // device_model: 'RMX1801',
+        // // os_build_number: 'RMX1801EX_11_C.26' }
 
 
         // get Send Seen 
@@ -99,7 +101,7 @@ client.on('ready', () => {
             console.log("NumberStatus", r)
         })
 
-        // also you can access wapi.js directly
+        // // also you can access wapi.js directly
 
 
 
