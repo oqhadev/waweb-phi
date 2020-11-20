@@ -76,7 +76,8 @@ client.on('disconnected', () => {
 
 
 ## Update
-- 27/03/2020 (v0.1.18) fix Update
+- 27/03/2020 (v0.1.20) fix Update from wa
+- 27/03/2020 (v0.1.19) Update puppeter to last version, now headless mode can run on linux cli 
 - 27/03/2020 (v0.1.16) Update 
 - 06/03/2020 (v0.1.15) add ack status (send,received,read) 
 - 19/02/2020 (v0.1.14) Add SendImageToID + fix SendImage + add sendSeen + add deviceInfo 
