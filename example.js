@@ -1,4 +1,4 @@
-const wa = require('./index.js')
+const wa = require('waweb-phi')
 
 
 const client = new wa({
