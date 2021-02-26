@@ -76,6 +76,7 @@ client.on('disconnected', () => {
 
 
 ## Update
+- 26/02/2021 (v0.1.21) fix Update from wa
 - 20/11/2020 (v0.1.20) fix Update from wa
 - 27/03/2020 (v0.1.19) Update puppeter to last version, now headless mode can run on linux cli 
 - 27/03/2020 (v0.1.16) Update 
