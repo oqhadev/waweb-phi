@@ -67,8 +67,12 @@ class Client extends EventEmitter {
 
             await page.waitForSelector(QR_CONTAINER_SELECTOR);
 
-            const qr = await page.$eval(QR_VALUE_SELECTOR, node => node.getAttribute('data-ref'));
-            this.emit(Events.QR_RECEIVED, qr);
+            setTimeout(async () => {
+
+                const qr = await page.$eval(QR_VALUE_SELECTOR, node => node.getAttribute('data-ref'));
+                this.emit(Events.QR_RECEIVED, qr);
+            }, 1000);
+
 
             // Wait for code scan
             await page.waitForSelector(KEEP_PHONE_CONNECTED_IMG_SELECTOR, { timeout: 0 });
@@ -100,7 +104,7 @@ class Client extends EventEmitter {
 
         await page.exposeFunction('onAck', data => {
             if (!data.id.fromMe && data.isNewMsg) return;
-           
+
             this.emit(Events.ACK, new Ack(this, data));
         });
         await page.exposeFunction('onAddMessageEvent', msg => {
@@ -139,7 +143,7 @@ class Client extends EventEmitter {
     async sendMessage(chatId, message, data) {
         return this.sendMessageToID(chatId, message, data)
     }
-  
+
     async getBatteryLevel() {
 
         let batLevel = await this.pupPage.evaluate(() => {
@@ -169,13 +173,13 @@ class Client extends EventEmitter {
         }
 
     }
-    async sendAttachToID(base64file,caption,filename,chatId, data) {
+    async sendAttachToID(base64file, caption, filename, chatId, data) {
 
         try {
 
-            let status = await this.pupPage.evaluate((base64file,caption,filename,chatId) => {
-                return WAPI.sendImageToID(base64file,chatId,filename,caption);
-            }, base64file,caption,filename,chatId)
+            let status = await this.pupPage.evaluate((base64file, caption, filename, chatId) => {
+                return WAPI.sendImageToID(base64file, chatId, filename, caption);
+            }, base64file, caption, filename, chatId)
 
 
             return {
@@ -191,26 +195,26 @@ class Client extends EventEmitter {
         }
 
     }
-    
-    async sendAttach(base64file,caption,filename,chatId, data) {
-        return this.sendAttachToID(base64file,caption,filename,chatId, data);
-        
+
+    async sendAttach(base64file, caption, filename, chatId, data) {
+        return this.sendAttachToID(base64file, caption, filename, chatId, data);
+
     }
 
-    async deviceInfo(){
-        return  await this.pupPage.evaluate(() => {
+    async deviceInfo() {
+        return await this.pupPage.evaluate(() => {
             return Store.Conn.phone;
-    
+
         })
     }
-    async myNumber(){
-        return  await this.pupPage.evaluate(() => {
+    async myNumber() {
+        return await this.pupPage.evaluate(() => {
             return Store.Conn.wid.user;
-    
+
         })
     }
-    async sendSeen(chatId){
-         await this.pupPage.evaluate((chatId) => {
+    async sendSeen(chatId) {
+        await this.pupPage.evaluate((chatId) => {
             return WAPI.sendSeen(chatId);
         }, chatId)
         return true;
